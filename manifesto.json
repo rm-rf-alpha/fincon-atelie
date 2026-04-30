@@ -1,0 +1,16 @@
+{
+  "name": "Ateliê da Naomi - Financeiro",
+  "short_name": "Ateliê",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fdfbf7",
+  "theme_color": "#5d4037",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIGZpbGw9IiM1ZDQwMzciIC8+PHJlY3QgeD0iMTU2IiB5PSIxMDAiIHdpZHRoPSIyMDAiIGhlaWdodD0iNDAiIGZpbGw9IiNkNGEzNzMiIHJ4PSIxMCIgLz48cmVjdCB4PSIxNTYiIHk9IjM3MiIgd2lkdGg9IjIwMCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2Q0YTM3MyIgcng9IjEwIiAvPjxyZWN0IHg9IjE4NiIgeT0iMTQwIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjIzMiIgZmlsbD0iI0U1MjUyMSIgLz48bGluZSB4MT0iMTg2IiB5MT0iMTgwIiB4Mj0iMzI2IiB5Mj0iMTgwIiBzdHJva2U9IiNjMTEyMWYiIHN0cm9rZS13aWR0aD0iMTAiLz48bGluZSB4MT0iMTg2IiB5MT0iMjIwIiB4Mj0iMzI2IiB5Mj0iMjIwIiBzdHJva2U9IiNjMTEyMWYiIHN0cm9rZS13aWR0aD0iMTAiLz48bGluZSB4MT0iMTg2IiB5MT0iMjYwIiB4Mj0iMzI2IiB5Mj0iMjYwIiBzdHJva2U9IiNjMTEyMWYiIHN0cm9rZS13aWR0aD0iMTAiLz48bGluZSB4MT0iMTg2IiB5MT0iMzAwIiB4Mj0iMzI2IiB5Mj0iMzAwIiBzdHJva2U9IiNjMTEyMWYiIHN0cm9rZS13aWR0aD0iMTAiLz48bGluZSB4MT0iMTg2IiB5MT0iMzQwIiB4Mj0iMzI2IiB5Mj0iMzQwIiBzdHJva2U9IiNjMTEyMWYiIHN0cm9rZS13aWR0aD0iMTAiLz48L3N2Zz4=",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
