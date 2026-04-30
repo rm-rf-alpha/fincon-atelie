@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ateliê | Financeiro</title>
+    <link rel="stylesheet" href="./src/css/main.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Ateliê</h1>
+            <div id="user-indicator"></div>
+        </header>
+
+        <main id="view-container">
+            </main>
+
+        <nav id="bottom-nav">
+            <button id="nav-dashboard" onclick="router.go('dashboard')">🏠</button>
+            <button id="nav-lotes" onclick="router.go('lotes')">🧵</button>
+            <button id="nav-relatorios" onclick="router.go('relatorios')">📊</button>
+        </nav>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+</body>
+</html>

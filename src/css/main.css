@@ -1,0 +1,170 @@
+/* src/css/main.css */
+:root {
+    --primary: #5d4037;       /* Marrom Alfaiataria */
+    --primary-light: #8b6b61;
+    --accent: #d4a373;        /* Bege Linha */
+    --bg: #fdfbf7;            /* Fundo off-white texturizado */
+    --text: #333333;
+    --text-muted: #777777;
+    --white: #ffffff;
+    --success: #2d6a4f;
+    --danger: #c1121f;
+    --danger-light: #fdf0f0;
+    --border: #e2dcd2;
+    --nav-height: 70px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+}
+
+#app { display: flex; flex-direction: column; height: 100vh; }
+
+/* Cabeçalho */
+header {
+    background: var(--primary);
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+header h1 { font-size: 1.2rem; color: var(--white); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+
+/* Container Principal */
+#view-container {
+    flex: 1;
+    padding: 1.2rem;
+    overflow-y: auto;
+    padding-bottom: calc(var(--nav-height) + 30px);
+}
+
+/* Navegação Inferior */
+#bottom-nav {
+    position: fixed; bottom: 0; width: 100%; height: var(--nav-height);
+    background: var(--white); display: flex; justify-content: space-around;
+    align-items: center; border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom);
+    z-index: 10;
+}
+#bottom-nav button {
+    background: none; border: none; font-size: 1.6rem; color: #d1c7bd; 
+    cursor: pointer; padding: 10px; transition: all 0.3s ease;
+}
+#bottom-nav button.active { color: var(--primary); transform: translateY(-4px); }
+
+/* Tipografia e Textos */
+h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 1.5rem; }
+h3 { font-size: 1.2rem; color: var(--primary); margin-bottom: 1rem; }
+.text-danger { color: var(--danger); }
+.text-success { color: var(--success); }
+.text-muted { color: var(--text-muted); font-size: 0.85rem; }
+
+/* Botões */
+.btn-primary {
+    background: var(--primary); color: var(--white); border: none; 
+    padding: 1rem; border-radius: 12px; font-weight: bold; font-size: 1rem;
+    width: 100%; cursor: pointer; box-shadow: 0 4px 10px rgba(93, 64, 55, 0.2);
+    transition: background 0.3s; display: flex; justify-content: center; align-items: center; gap: 8px;
+}
+.btn-primary:active { transform: scale(0.98); background: var(--primary-light); }
+.btn-text {
+    background: none; border: none; color: var(--text-muted); padding: 1rem;
+    width: 100%; font-weight: 600; cursor: pointer; margin-top: 0.5rem;
+}
+.icon-btn {
+    background: #f0ece6; border: none; border-radius: 8px; width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    cursor: pointer; color: var(--primary); transition: background 0.2s;
+}
+.icon-btn:active { background: #e2dcd2; }
+
+/* Formulários */
+.form-container fieldset {
+    border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem;
+    margin-bottom: 1.5rem; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+.form-container legend {
+    font-weight: bold; color: var(--primary); padding: 0 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.input-group { margin-bottom: 1rem; }
+.input-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--primary-light); }
+.input-row { display: flex; gap: 12px; }
+.input-row .input-group { flex: 1; }
+
+.form-control {
+    width: 100%; padding: 12px; border: 1px solid #d1c7bd; border-radius: 8px;
+    font-size: 1rem; background: var(--white); color: var(--text); transition: border-color 0.3s;
+}
+.form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(93, 64, 55, 0.1); }
+
+/* Cards de Dashboards e Relatórios */
+.dashboard-card {
+    background: var(--white); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem;
+    border-left: 5px solid var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    position: relative;
+}
+.dashboard-card-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; align-items: flex-start; }
+.dashboard-card-title { font-weight: 700; font-size: 1.1rem; color: var(--primary); }
+.dashboard-card-actions { display: flex; gap: 8px; position: absolute; top: 1.2rem; right: 1.2rem; }
+
+/* Relatórios: Agrupamento de Fornecedores */
+.supplier-group {
+    background: var(--white); border-radius: 12px; margin-bottom: 1.5rem;
+    border: 1px solid var(--border); overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+.supplier-header {
+    background: #f4f0ea; padding: 1rem; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; font-weight: bold;
+}
+.supplier-item {
+    padding: 1rem; border-bottom: 1px solid #f0ece6; display: flex; justify-content: space-between; align-items: center;
+}
+.supplier-item:last-child { border-bottom: none; }
+
+/* Relatórios: Dívidas */
+.debt-card {
+    background: var(--danger-light); border-left: 5px solid var(--danger);
+    padding: 1rem; border-radius: 8px; margin-bottom: 0.8rem;
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+/* Painel de Fechamento */
+.summary-panel {
+    background: var(--white); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;
+    border: 2px solid var(--primary); box-shadow: 0 6px 15px rgba(93, 64, 55, 0.1);
+}
+.summary-row { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.95rem; }
+.summary-divider { height: 1px; background: var(--border); margin: 1rem 0; }
+
+/* Design 2D / 8-bits (Mario e Luigi Style) para as Sócias */
+.socias-container { display: flex; gap: 15px; margin-top: 1.5rem; }
+.socia-card {
+    flex: 1; border: 4px solid #000; background: #FFD3B6; border-radius: 8px;
+    box-shadow: 4px 4px 0px #000; text-align: center; overflow: hidden;
+}
+.socia-header {
+    border-bottom: 4px solid #000; padding: 10px; display: flex; justify-content: center;
+}
+.socia-avatar {
+    width: 40px; height: 40px; border: 3px solid #000; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: white;
+    font-weight: bold; font-family: monospace; font-size: 1.4rem; text-shadow: 1px 1px 0 #000;
+}
+/* Player 1: Naomi (Vermelho Mario) */
+.player-1 { border-color: #E52521; }
+.player-1 .socia-header { background: #E52521; }
+.player-1 .socia-avatar { background: #E52521; }
+/* Player 2: Prima (Verde Luigi) */
+.player-2 { border-color: #43B047; }
+.player-2 .socia-header { background: #43B047; }
+.player-2 .socia-avatar { background: #43B047; }
+
+.socia-info { padding: 12px 5px; }
+.socia-name { font-family: monospace; font-weight: bold; color: #000; font-size: 0.9rem; letter-spacing: 1px; }
+.socia-value { margin-top: 5px; color: #000; font-size: 1.2rem; font-weight: 900; }
