@@ -1,8 +1,8 @@
 // src/js/api.js
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-// ATENÇÃO: Cole as credenciais do seu Supabase aqui:
-const supabaseUrl = 'https://rkttidfbvpalqdoaelpw.supabase.co/rest/v1/';
+// CORREÇÃO: A URL deve terminar no ".co", sem adicionar "/rest/v1"
+const supabaseUrl = 'https://rkttidfbvpalqdoaelpw.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJrdHRpZGZidnBhbHFkb2FlbHB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc1NTg1NTAsImV4cCI6MjA5MzEzNDU1MH0.TmZc5Qx4-LJ2kongPdAiizfnnhhdPEM4bvwLzdc-7kA';
 
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -36,7 +36,8 @@ export const api = {
 
     // --- CONTATOS (Terceirizados) ---
     getContatos: async () => {
-        const { data } = await supabase.from('contatos').select('nome');
+        const { data, error } = await supabase.from('contatos').select('nome');
+        if (error) console.error(error);
         return data ? data.map(c => c.nome) : [];
     },
     salvarContato: async (nome) => {
@@ -49,7 +50,8 @@ export const api = {
 
     // --- FORNECEDORES ---
     getFornecedores: async () => {
-        const { data } = await supabase.from('fornecedores').select('nome');
+        const { data, error } = await supabase.from('fornecedores').select('nome');
+        if (error) console.error(error);
         return data ? data.map(f => f.nome) : [];
     },
     salvarFornecedor: async (nome) => {
@@ -62,7 +64,8 @@ export const api = {
 
     // --- ENERGIA ---
     getEnergia: async (mes) => {
-        const { data } = await supabase.from('energia').select('valor').eq('mes', mes).maybeSingle();
+        const { data, error } = await supabase.from('energia').select('valor').eq('mes', mes).maybeSingle();
+        if (error) console.error(error);
         return data ? Number(data.valor) : 0;
     },
     salvarEnergia: async (mes, valor) => {
