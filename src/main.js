@@ -9,7 +9,7 @@ window.router = {
         if(btn) btn.classList.add('active');
         if (route === 'dashboard') carregarDashboard();
         if (route === 'lotes') window.abrirFormularioLote();
-        if (route === 'relatorios') carregarRelatorios(); // Ao clicar no menu, carrega o mês atual
+        if (route === 'relatorios') carregarRelatorios();
     }
 };
 
@@ -26,7 +26,7 @@ const iniciarSmartTour = () => {
     container.innerHTML = `
         <div style="text-align:center; margin-top:20%; background:var(--white); padding:2.5rem 1.5rem; border-radius:20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
             <h2>Ateliê da Naomi 🪡</h2>
-            <p class="text-muted" style="margin-bottom: 2rem;">Sistema de Gestão de Produção e Financeiro.</p>
+            <p class="text-muted" style="margin-bottom: 2rem;">Seu Sistema de Gestão de Produção e Financeiro.</p>
             <button class="btn-primary" id="btn-end-tour">Acessar Painel</button>
         </div>
     `;
@@ -36,12 +36,11 @@ const iniciarSmartTour = () => {
     });
 };
 
-// Helper para descobrir de qual mês é o lote (YYYY-MM)
 const getMesLote = (lote) => {
     if (lote.prazoEntrega) return lote.prazoEntrega.substring(0, 7);
     if (lote.dataRecebimento) return lote.dataRecebimento.substring(0, 7);
     if (lote.dataRegistro) {
-        const parts = lote.dataRegistro.split('/'); // DD/MM/YYYY
+        const parts = lote.dataRegistro.split('/');
         if (parts.length === 3) return `${parts[2]}-${parts[1]}`;
     }
     return "";
@@ -52,7 +51,6 @@ const carregarDashboard = async () => {
     const container = document.getElementById('view-container');
     const lotes = await api.getLotes();
     
-    // Opcional: ordenar para exibir os mais recentes primeiro
     lotes.sort((a, b) => (b.prazoEntrega || b.dataRegistro).localeCompare(a.prazoEntrega || a.dataRegistro));
 
     const listaLotesHTML = lotes.length === 0 
@@ -226,21 +224,17 @@ window.abrirFormularioLote = async (idEdicao = null) => {
     });
 };
 
-// --- RELATÓRIOS E RATEIO COM FILTRO MENSAL ---
+// --- RELATÓRIOS (CONTROLE INDIVIDUAL) ---
 const carregarRelatorios = async (mesSelecionado = null) => {
     const container = document.getElementById('view-container');
     
-    // Se nenhum mês foi passado, pega o mês atual
     if (!mesSelecionado) {
         const hoje = new Date();
         mesSelecionado = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}`;
     }
 
     const lotesRaw = await api.getLotes();
-    
-    // Filtra os lotes para incluir apenas os pertencentes ao mês selecionado
     const lotesDoMes = lotesRaw.filter(l => getMesLote(l) === mesSelecionado);
-    
     const contaEnergia = await api.getEnergia(mesSelecionado);
 
     const grupos = lotesDoMes.reduce((acc, l) => {
@@ -328,45 +322,24 @@ const carregarRelatorios = async (mesSelecionado = null) => {
                     <button id="save-energy" class="btn-primary" style="width: auto; padding: 6px 12px; border-radius: 8px;">OK</button>
                 </div>
             </div>
-
-            <div class="summary-divider"></div>
-            
-            <div style="text-align: center; margin-top: 1rem;">
-                <p class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Lucro Líquido Geral</p>
-                <strong class="text-success" style="font-size: 1.8rem;">${formatarMoeda(f.lucroLiquido)}</strong>
-            </div>
         </div>
 
-        <h3 style="text-align: center; margin-top: 2rem;">Lucro Individual (${mesSelecionado.split('-')[1]}/${mesSelecionado.split('-')[0]})</h3>
-        <div class="socias-container">
-            <div class="socia-card player-1">
-                <div class="socia-header">
-                    <div class="socia-avatar">N</div>
-                </div>
-                <div class="socia-info">
-                    <div class="socia-name">NAOMI</div>
-                    <div class="socia-value">${formatarMoeda(f.cotaIndividual)}</div>
-                </div>
+        <h3 style="text-align: center; margin-top: 2rem;">Resultado do Período</h3>
+        <div class="socia-card">
+            <div class="socia-header">
+                <div class="socia-avatar">N</div>
             </div>
-
-            <div class="socia-card player-2">
-                <div class="socia-header">
-                    <div class="socia-avatar">P</div>
-                </div>
-                <div class="socia-info">
-                    <div class="socia-name">PRIMA</div>
-                    <div class="socia-value">${formatarMoeda(f.cotaIndividual)}</div>
-                </div>
+            <div class="socia-info">
+                <div class="socia-name">CAIXA DA NAOMI</div>
+                <div class="socia-value">${formatarMoeda(f.lucroLiquido)}</div>
             </div>
         </div>
     `;
 
-    // Gatilho para quando o usuário trocar o mês no input
     document.getElementById('filtro-mes').addEventListener('change', (e) => {
         carregarRelatorios(e.target.value);
     });
 
-    // Salvar a energia atrelada ao mês selecionado
     document.getElementById('save-energy').addEventListener('click', async () => {
         await api.salvarEnergia(mesSelecionado, document.getElementById('input-energia').value);
         carregarRelatorios(mesSelecionado);
